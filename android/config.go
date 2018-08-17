@@ -27,6 +27,8 @@ import (
 
 	"github.com/google/blueprint/bootstrap"
 	"github.com/google/blueprint/proptools"
+
+	"kcuf/soong/android"
 )
 
 var Bool = proptools.Bool
@@ -468,6 +470,14 @@ func (c *config) ResourceOverlays() []string {
 	return *c.productVariables.ResourceOverlays
 }
 
+func (c *config) JavaSourceOverlays() string {
+	return String(c.productVariables.Kcuf.Java_Source_Overlays)
+}
+
+func (c *config) JavaSourceOverlayModuleWhitelist() []string {
+	return android.KcufConfig.JavaSourceOverlayModuleWhitelist
+}
+
 func (c *config) PlatformVersionName() string {
 	return String(c.productVariables.Platform_version_name)
 }
@@ -777,7 +787,7 @@ func (c *deviceConfig) DeviceKernelHeaderDirs() []string {
 }
 
 func (c *deviceConfig) SpecificCameraParametersLibrary() string {
-	return String(c.config.productVariables.KCUF.Specific_camera_parameter_library)
+	return String(c.config.productVariables.Kcuf.Specific_camera_parameter_library)
 }
 
 func (c *deviceConfig) NativeCoverageEnabled() bool {
